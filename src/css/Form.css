@@ -1,0 +1,20 @@
+form {
+  border: 1px solid black;
+  border-radius: 18px;
+  padding: 20px;
+  width: 500px;
+}
+
+label {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 12px;
+}
+
+button {
+  background-color: blue;
+  border-radius: 7px;
+  color: white;
+  font-weight: 700;
+  padding: 10px;
+}
