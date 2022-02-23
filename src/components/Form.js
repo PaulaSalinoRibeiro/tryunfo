@@ -26,7 +26,7 @@ export default class Form extends Component {
             type="text"
             data-testid="name-input"
             id="name"
-            name="name"
+            name="cardName"
             value={ cardName }
             onChange={ onInputChange }
           />
@@ -36,7 +36,7 @@ export default class Form extends Component {
           <textarea
             id="description"
             data-testid="description-input"
-            name="description"
+            name="cardDescription"
             value={ cardDescription }
             onChange={ onInputChange }
           />
@@ -47,7 +47,7 @@ export default class Form extends Component {
             type="number"
             id="attr1"
             data-testid="attr1-input"
-            name="attr1"
+            name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
@@ -58,7 +58,7 @@ export default class Form extends Component {
             type="number"
             id="attr2"
             data-testid="attr2-input"
-            name="attr2"
+            name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
           />
@@ -67,9 +67,9 @@ export default class Form extends Component {
           Atributo 3:
           <input
             type="number"
-            id="attr3"
+            id="cardAttr3"
             data-testid="attr3-input"
-            name="attr3"
+            name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
@@ -80,7 +80,7 @@ export default class Form extends Component {
             type="text"
             id="card-img"
             data-testid="image-input"
-            name="img"
+            name="cardImage"
             value={ cardImage }
             onChange={ onInputChange }
           />
@@ -89,7 +89,7 @@ export default class Form extends Component {
           Raridade:
           <select
             data-testid="rare-input"
-            name="type"
+            name="cardRare"
             id="card-type"
             value={ cardRare }
             onChange={ onInputChange }
@@ -105,7 +105,7 @@ export default class Form extends Component {
             type="checkbox"
             id="trunfo"
             data-testid="trunfo-input"
-            name="trunfo"
+            name="cardTrunfo"
             checked={ cardTrunfo }
             onChange={ onInputChange }
           />
