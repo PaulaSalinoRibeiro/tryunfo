@@ -25,22 +25,32 @@ class App extends React.Component {
   onInputChange({ target }) {
     const { name } = target;
     const value = target.type === 'checked' ? target.checked : target.value;
-    this.setState({ [name]: value }, this.validatedForm());
+    this.setState({ [name]: value }, () => this.validatedForm());
   }
 
-  onSaveButtonClick(event) {
-    event.preventDefault();
+  onSaveButtonClick() {
+    // event.preventDefault();
   }
 
   validatedForm() {
-    /* const {
-      cardName,
-      cardDescription,
-      cardImage,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3
-    } = this.state; */
+    const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2, cardAttr3,
+    } = this.state;
+    const sumMax = 210;
+    const max = 90;
+    const Attr1 = parseInt(cardAttr1, 10);
+    const Attr2 = parseInt(cardAttr2, 10);
+    const Attr3 = parseInt(cardAttr3, 10);
+    if (cardName
+        && cardDescription
+        && cardImage
+        && ((Attr1 + Attr2 + Attr3) <= sumMax)
+        && (Attr1 >= 0 && Attr1 <= max)
+        && (Attr2 >= 0 && Attr2 <= max)
+        && (Attr3 >= 0 && Attr3 <= max)) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   }
 
   render() {
