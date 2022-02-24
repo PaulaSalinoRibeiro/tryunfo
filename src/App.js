@@ -23,6 +23,15 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.validatedForm = this.validatedForm.bind(this);
+    this.handleRemoveCard = this.handleRemoveCard.bind(this);
+  }
+
+  handleRemoveCard(card) {
+    const { savedCards } = this.state;
+    this.setState({ savedCards: savedCards.filter((cards) => cards !== card) });
+    this.setState((prev) => (
+      { hasTrunfo: prev.savedCards.some(({ cardTrunfo }) => cardTrunfo) }
+    ));
   }
 
   onInputChange({ target }) {
@@ -114,17 +123,28 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <div>
-          {savedCards.map((card) => (<Card
-            key={ card }
-            cardName={ card.cardName }
-            cardDescription={ card.cardDescription }
-            cardImage={ card.cardImage }
-            cardAttr1={ card.cardAttr1 }
-            cardAttr2={ card.cardAttr2 }
-            cardAttr3={ card.cardAttr3 }
-            cardRare={ card.cardRare }
-            cardTrunfo={ card.cardTrunfo }
-          />))}
+          {
+            savedCards.map((card) => (
+              <section key={ card }>
+                <Card
+                  cardName={ card.cardName }
+                  cardDescription={ card.cardDescription }
+                  cardImage={ card.cardImage }
+                  cardAttr1={ card.cardAttr1 }
+                  cardAttr2={ card.cardAttr2 }
+                  cardAttr3={ card.cardAttr3 }
+                  cardRare={ card.cardRare }
+                  cardTrunfo={ card.cardTrunfo }
+                />
+                <button
+                  type="button"
+                  data-testid="delete-button"
+                  onClick={ () => this.handleRemoveCard(card) }
+                >
+                  Excluir
+                </button>
+              </section>))
+          }
         </div>
       </div>
     );
