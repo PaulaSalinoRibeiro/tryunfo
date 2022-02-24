@@ -18,12 +18,18 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       savedCards: [],
       hasTrunfo: false,
+      search: '',
 
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.validatedForm = this.validatedForm.bind(this);
     this.handleRemoveCard = this.handleRemoveCard.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  handleSearch({ target }) {
+    this.setState({ search: target.value });
   }
 
   handleRemoveCard(card) {
@@ -93,11 +99,23 @@ class App extends React.Component {
       isSaveButtonDisabled,
       savedCards,
       hasTrunfo,
+      search,
     } } = this;
 
     return (
       <div className="container">
-        <h1>Tryunfo</h1>
+        <div className="input-search">
+          <h1>Tryunfo</h1>
+          <label htmlFor="search">
+            <input
+              type="text"
+              id="search"
+              data-testid="name-filter"
+              placeholder="Pesquise aqui"
+              onChange={ this.handleSearch }
+            />
+          </label>
+        </div>
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -124,31 +142,32 @@ class App extends React.Component {
         />
         <div>
           {
-            savedCards.map((card) => (
-              <section key={ card }>
-                <Card
-                  cardName={ card.cardName }
-                  cardDescription={ card.cardDescription }
-                  cardImage={ card.cardImage }
-                  cardAttr1={ card.cardAttr1 }
-                  cardAttr2={ card.cardAttr2 }
-                  cardAttr3={ card.cardAttr3 }
-                  cardRare={ card.cardRare }
-                  cardTrunfo={ card.cardTrunfo }
-                />
-                <button
-                  type="button"
-                  data-testid="delete-button"
-                  onClick={ () => this.handleRemoveCard(card) }
-                >
-                  Excluir
-                </button>
-              </section>))
+            savedCards.filter((card) => card.cardName.includes(search))
+              .map((card) => (
+                <section key={ card }>
+                  <Card
+                    cardName={ card.cardName }
+                    cardDescription={ card.cardDescription }
+                    cardImage={ card.cardImage }
+                    cardAttr1={ card.cardAttr1 }
+                    cardAttr2={ card.cardAttr2 }
+                    cardAttr3={ card.cardAttr3 }
+                    cardRare={ card.cardRare }
+                    cardTrunfo={ card.cardTrunfo }
+                  />
+                  <button
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={ () => this.handleRemoveCard(card) }
+                  >
+                    Excluir
+                  </button>
+                </section>))
           }
         </div>
       </div>
     );
   }
 }
-//
+
 export default App;

@@ -3,6 +3,8 @@
   flex-wrap: wrap;
 }
 
-h1 {
+.input-search{
+  margin-left: 35%;
+  margin-right: 35%;
   width: 100%;
 }
