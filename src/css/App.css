@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1 {
+  width: 100%;
+}

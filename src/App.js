@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './css/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       savedCards: [],
+      hasTrunfo: false,
 
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -40,8 +42,12 @@ class App extends React.Component {
         cardAttr1: 0,
         cardAttr2: 0,
         cardAttr3: 0,
-        cardRare: 'normal' },
+        cardRare: 'normal',
+        cardTrunfo: false },
     );
+    this.setState((prev) => (
+      { hasTrunfo: prev.savedCards.some(({ cardTrunfo }) => cardTrunfo) }
+    ));
   }
 
   validatedForm() {
@@ -49,9 +55,9 @@ class App extends React.Component {
     } = this.state;
     const sumMax = 210;
     const max = 90;
-    const Attr1 = parseInt(cardAttr1, 10);
-    const Attr2 = parseInt(cardAttr2, 10);
-    const Attr3 = parseInt(cardAttr3, 10);
+    const Attr1 = Number(cardAttr1);
+    const Attr2 = Number(cardAttr2);
+    const Attr3 = Number(cardAttr3);
     if (cardName
         && cardDescription
         && cardImage
@@ -76,10 +82,11 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
+      hasTrunfo,
     } } = this;
 
     return (
-      <div>
+      <div className="container">
         <h1>Tryunfo</h1>
         <Form
           cardName={ cardName }
@@ -91,6 +98,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          hasTrunfo={ hasTrunfo }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
