@@ -20,6 +20,7 @@ class App extends React.Component {
       hasTrunfo: false,
       search: '',
       selected: '',
+      isDisable: false,
 
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -28,6 +29,11 @@ class App extends React.Component {
     this.handleRemoveCard = this.handleRemoveCard.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
+    this.handleTrunfo = this.handleTrunfo.bind(this);
+  }
+
+  handleTrunfo() {
+    this.setState(() => ({ isDisable: true }));
   }
 
   handleSelected({ target: { value } }) {
@@ -107,6 +113,7 @@ class App extends React.Component {
       hasTrunfo,
       search,
       selected,
+      isDisable,
     } } = this;
 
     return (
@@ -119,6 +126,7 @@ class App extends React.Component {
               id="search"
               data-testid="name-filter"
               placeholder="Pesquise aqui"
+              disabled={ isDisable }
               onChange={ this.handleSearch }
             />
           </label>
@@ -126,6 +134,7 @@ class App extends React.Component {
             <select
               id="selected"
               data-testid="rare-filter"
+              disabled={ isDisable }
               onChange={ this.handleSelected }
             >
               <option>todas</option>
@@ -133,6 +142,15 @@ class App extends React.Component {
               <option>raro</option>
               <option>muito raro</option>
             </select>
+          </label>
+          <label htmlFor="trunfo">
+            Super Trunfo
+            <input
+              id="trunfo"
+              data-testid="trunfo-filter"
+              onChange={ this.handleTrunfo }
+              type="checkbox"
+            />
           </label>
         </div>
         <Form
@@ -162,6 +180,9 @@ class App extends React.Component {
         <div>
           {
             savedCards
+              .filter((card) => (isDisable
+                ? card.cardTrunfo
+                : card))
               .filter((card) => (selected !== ''
                 ? card.cardRare === selected
                 : card.cardRare.includes(selected)))
