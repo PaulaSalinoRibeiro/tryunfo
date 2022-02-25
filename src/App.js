@@ -19,6 +19,7 @@ class App extends React.Component {
       savedCards: [],
       hasTrunfo: false,
       search: '',
+      selected: '',
 
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -26,6 +27,11 @@ class App extends React.Component {
     this.validatedForm = this.validatedForm.bind(this);
     this.handleRemoveCard = this.handleRemoveCard.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
+  }
+
+  handleSelected({ target: { value } }) {
+    this.setState({ selected: value === 'todas' ? '' : value });
   }
 
   handleSearch({ target }) {
@@ -100,6 +106,7 @@ class App extends React.Component {
       savedCards,
       hasTrunfo,
       search,
+      selected,
     } } = this;
 
     return (
@@ -114,6 +121,18 @@ class App extends React.Component {
               placeholder="Pesquise aqui"
               onChange={ this.handleSearch }
             />
+          </label>
+          <label htmlFor="selected">
+            <select
+              id="selected"
+              data-testid="rare-filter"
+              onChange={ this.handleSelected }
+            >
+              <option>todas</option>
+              <option>normal</option>
+              <option>raro</option>
+              <option>muito raro</option>
+            </select>
           </label>
         </div>
         <Form
@@ -142,7 +161,11 @@ class App extends React.Component {
         />
         <div>
           {
-            savedCards.filter((card) => card.cardName.includes(search))
+            savedCards
+              .filter((card) => (selected !== ''
+                ? card.cardRare === selected
+                : card.cardRare.includes(selected)))
+              .filter((card) => card.cardName.includes(search))
               .map((card) => (
                 <section key={ card }>
                   <Card
