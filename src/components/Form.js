@@ -19,13 +19,15 @@ export default class Form extends Component {
       onSaveButtonClick,
     } = this.props;
     return (
-      <form>
+      <form className="form">
+        <h1 className="card-title">Adicionar Carta</h1>
         <label htmlFor="name">
           Nome da carta:
           <input
             type="text"
             data-testid="name-input"
             id="name"
+            className="input-form"
             name="cardName"
             value={ cardName }
             onChange={ onInputChange }
@@ -35,6 +37,7 @@ export default class Form extends Component {
           Descrição da carta:
           <textarea
             id="description"
+            className="input-form"
             data-testid="description-input"
             name="cardDescription"
             value={ cardDescription }
@@ -46,6 +49,7 @@ export default class Form extends Component {
           <input
             type="number"
             id="attr1"
+            className="input-form"
             data-testid="attr1-input"
             name="cardAttr1"
             value={ cardAttr1 }
@@ -57,6 +61,7 @@ export default class Form extends Component {
           <input
             type="number"
             id="attr2"
+            className="input-form"
             data-testid="attr2-input"
             name="cardAttr2"
             value={ cardAttr2 }
@@ -68,6 +73,7 @@ export default class Form extends Component {
           <input
             type="number"
             id="cardAttr3"
+            className="input-form"
             data-testid="attr3-input"
             name="cardAttr3"
             value={ cardAttr3 }
@@ -79,6 +85,7 @@ export default class Form extends Component {
           <input
             type="text"
             id="card-img"
+            className="input-form"
             data-testid="image-input"
             name="cardImage"
             value={ cardImage }
@@ -91,6 +98,7 @@ export default class Form extends Component {
             data-testid="rare-input"
             name="cardRare"
             id="card-type"
+            className="input-form"
             value={ cardRare }
             onChange={ onInputChange }
           >
@@ -108,6 +116,7 @@ export default class Form extends Component {
               <input
                 type="checkbox"
                 id="trunfo"
+                className="input-form"
                 data-testid="trunfo-input"
                 name="cardTrunfo"
                 checked={ cardTrunfo }
@@ -117,6 +126,7 @@ export default class Form extends Component {
           )}
         <button
           type="submit"
+          className="btn-save"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }

@@ -18,11 +18,26 @@ export default class Card extends Component {
       <div className="card">
         <h1 data-testid="name-card">{cardName}</h1>
         <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{cardRare}</p>
+        <div className="card-info">
+          <p data-testid="description-card">
+            {cardDescription}
+          </p>
+          <p data-testid="attr1-card">
+            Attr1........
+            {cardAttr1}
+          </p>
+          <p data-testid="attr2-card">
+            Attr2........
+            {cardAttr2}
+          </p>
+          <p data-testid="attr3-card">
+            Attr3........
+            {cardAttr3}
+          </p>
+          <p data-testid="rare-card">
+            {cardRare}
+          </p>
+        </div>
         { cardTrunfo ? <span data-testid="trunfo-card">Super Trunfo</span> : ''}
       </div>
     );

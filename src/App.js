@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   handleTrunfo() {
-    this.setState(() => ({ isDisable: true }));
+    this.setState((prevState) => ({ isDisable: !prevState.isDisable }));
   }
 
   handleSelected({ target: { value } }) {
@@ -119,11 +119,13 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="input-search">
-          <h1>Tryunfo</h1>
+          <h1 className="title">Tryunfo</h1>
           <label htmlFor="search">
+            Carta:
             <input
               type="text"
               id="search"
+              className="search"
               data-testid="name-filter"
               placeholder="Pesquise aqui"
               disabled={ isDisable }
@@ -131,8 +133,10 @@ class App extends React.Component {
             />
           </label>
           <label htmlFor="selected">
+            Raridade:
             <select
               id="selected"
+              className="selected"
               data-testid="rare-filter"
               disabled={ isDisable }
               onChange={ this.handleSelected }
@@ -144,9 +148,10 @@ class App extends React.Component {
             </select>
           </label>
           <label htmlFor="trunfo">
-            Super Trunfo
+            Super Trunfo:
             <input
               id="trunfo"
+              className="trunfo"
               data-testid="trunfo-filter"
               onChange={ this.handleTrunfo }
               type="checkbox"
@@ -177,7 +182,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <div>
+        <div className="form-filter">
           {
             savedCards
               .filter((card) => (isDisable
@@ -188,7 +193,10 @@ class App extends React.Component {
                 : card.cardRare.includes(selected)))
               .filter((card) => card.cardName.includes(search))
               .map((card) => (
-                <section key={ card }>
+                <section
+                  className="cards-saved"
+                  key={ card }
+                >
                   <Card
                     cardName={ card.cardName }
                     cardDescription={ card.cardDescription }
@@ -201,6 +209,7 @@ class App extends React.Component {
                   />
                   <button
                     type="button"
+                    className="btn-delete"
                     data-testid="delete-button"
                     onClick={ () => this.handleRemoveCard(card) }
                   >
